@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harry Lin 林奕圻 ｜ Designer × Developer × Connector</title>
+<meta name="description" content="Harry Lin 林奕圻 個人作品自介網站 — 設計、前端開發、國際業務、跨領域整合">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#E5007D;
+    --pink-soft:#F4A6C6;
+    --teal:#1F9D8A;
+    --black:#1A1A1A;
+    --gray-dark:#555555;
+    --gray-med:#8C8C8C;
+    --gray-light:#C9C9C9;
+    --card-bg:#FBFBFB;
+    --line:#ECECEC;
+    --white:#FFFFFF;
+    --max:1180px;
+    --serif:'Playfair Display', 'Noto Sans TC', serif;
+    --sans:'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;overflow-x:hidden;width:100%;}
+  body{
+    font-family:var(--sans);
+    color:var(--black);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    width:100%;
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+  section{position:relative;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+
+  ::selection{background:var(--pink);color:#fff;}
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(255,255,255,0);
+    transition:background .3s ease, box-shadow .3s ease, padding .3s ease;
+    padding:22px 0;
+  }
+  header.scrolled{
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(10px);
+    box-shadow:0 1px 0 var(--line);
+    padding:14px 0;
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;}
+  .logo{
+    font-family:var(--serif);font-weight:700;font-size:20px;color:var(--pink);
+    letter-spacing:.2px;
+  }
+  nav.links{display:flex;gap:34px;align-items:center;}
+  nav.links a{
+    font-size:14px;font-weight:500;color:var(--gray-dark);
+    position:relative;padding:4px 0;
+  }
+  nav.links a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--pink);
+    transition:width .25s ease;
+  }
+  nav.links a:hover::after{width:100%;}
+  nav.links a:hover{color:var(--black);}
+  .nav-cta{
+    background:var(--pink);color:#fff !important;padding:9px 20px;border-radius:30px;
+    font-weight:700;font-size:13px;letter-spacing:.3px;
+  }
+  .nav-cta:hover{background:#c40069;}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
+  .burger span{width:24px;height:2px;background:var(--black);display:block;}
+  .mobile-menu{
+    display:none;position:fixed;inset:0;background:#fff;z-index:200;
+    flex-direction:column;align-items:center;justify-content:center;gap:28px;
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{font-family:var(--serif);font-size:26px;font-weight:600;}
+  .mobile-close{position:absolute;top:26px;right:28px;font-size:28px;background:none;border:none;color:var(--black);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh;display:flex;align-items:center;
+    padding-top:120px;padding-bottom:80px;
+    background:#fff;
+    overflow:hidden;
+  }
+  .hero-inner{position:relative;z-index:2;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:700;letter-spacing:2.5px;color:var(--gray-med);
+    text-transform:uppercase;margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--pink);display:inline-block;}
+  .hero h1{
+    font-family:var(--serif);font-weight:800;color:var(--black);
+    font-size:clamp(52px,9vw,104px);line-height:0.98;letter-spacing:-1px;
+  }
+  .hero h1 .accent{color:var(--pink);font-style:italic;font-weight:600;}
+  .hero-role{
+    margin-top:22px;font-size:clamp(16px,2vw,20px);color:var(--gray-dark);font-weight:500;
+    max-width:640px;
+  }
+  .hero-role b{color:var(--black);font-weight:700;}
+  .hero-quote{
+    margin-top:30px;max-width:560px;padding-left:20px;border-left:3px solid var(--pink);
+    font-style:italic;color:var(--gray-dark);font-size:15px;line-height:1.7;
+  }
+  .hero-actions{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:32px;
+    font-weight:700;font-size:14px;letter-spacing:.3px;transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .btn-primary{background:var(--pink);color:#fff;box-shadow:0 10px 24px -8px rgba(229,0,125,.55);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 28px -8px rgba(229,0,125,.6);}
+  .btn-outline{border:1.5px solid var(--black);color:var(--black);}
+  .btn-outline:hover{background:var(--black);color:#fff;transform:translateY(-2px);}
+  .hero-stats{display:flex;gap:44px;margin-top:64px;flex-wrap:wrap;}
+  .stat b{
+    display:block;font-family:var(--serif);font-size:34px;font-weight:800;color:var(--pink);
+  }
+  .stat span{font-size:12.5px;color:var(--gray-med);letter-spacing:.4px;}
+
+  .hero-blob{
+    position:absolute;right:-6%;top:8%;width:620px;height:620px;border-radius:50%;
+    background:radial-gradient(circle at 65% 35%, var(--pink-soft) 0%, var(--pink) 42%, var(--teal) 78%, rgba(255,255,255,0) 100%);
+    opacity:.85;filter:blur(2px);z-index:1;
+  }
+  .hero-dots{position:absolute;right:2%;top:2%;width:340px;opacity:.5;z-index:1;}
+
+  /* ---------- section shell ---------- */
+  .module{padding:120px 0;}
+  .module.alt{background:#FCFCFD;}
+  .module-head{display:flex;gap:28px;align-items:flex-start;margin-bottom:56px;}
+  .module-num{
+    font-family:var(--serif);font-weight:800;font-size:64px;color:var(--pink);line-height:1;
+    min-width:110px;
+  }
+  .module-num small{
+    display:block;font-family:var(--sans);font-size:11px;font-weight:700;color:var(--gray-med);
+    letter-spacing:2.5px;margin-bottom:8px;
+  }
+  .module-title h2{font-family:var(--serif);font-size:clamp(28px,4vw,40px);font-weight:700;}
+  .module-title p{margin-top:10px;color:var(--gray-med);font-size:14.5px;max-width:520px;}
+  .dash{width:34px;height:3px;background:var(--pink);margin:18px 0;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+  .about-lead{font-size:17px;line-height:1.85;color:var(--gray-dark);}
+  .quote-card{
+    margin-top:32px;background:var(--card-bg);border:1px solid var(--line);border-radius:16px;
+    padding:26px 28px;position:relative;
+  }
+  .quote-card::before{content:"“";font-family:var(--serif);font-size:64px;color:var(--pink-soft);
+    position:absolute;top:-6px;left:16px;line-height:1;}
+  .quote-card p{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--black);
+    padding-left:26px;line-height:1.6;}
+  .strength{
+    display:flex;gap:18px;padding:22px 0;border-top:1px solid var(--line);
+  }
+  .strength:first-child{border-top:none;padding-top:0;}
+  .strength-num{
+    font-family:var(--serif);font-weight:800;font-size:22px;color:var(--pink);min-width:34px;
+  }
+  .strength h3{font-size:15.5px;font-weight:700;margin-bottom:6px;}
+  .strength p{font-size:13.8px;color:var(--gray-dark);line-height:1.7;}
+
+  /* ---------- experience timeline ---------- */
+  .timeline{position:relative;padding-left:26px;}
+  .timeline::before{content:"";position:absolute;left:4px;top:6px;bottom:6px;width:2px;background:var(--line);}
+  .t-item{position:relative;padding-bottom:44px;padding-left:36px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:"";position:absolute;left:-3px;top:4px;width:11px;height:11px;border-radius:50%;
+    background:var(--pink);box-shadow:0 0 0 4px #fff, 0 0 0 5px var(--line);
+  }
+  .t-year{font-family:var(--serif);font-weight:800;color:var(--pink);font-size:20px;margin-bottom:4px;display:block;}
+  .t-role{font-weight:700;font-size:15.5px;color:var(--black);}
+  .t-desc{font-size:13.8px;color:var(--gray-dark);margin-top:5px;line-height:1.6;}
+  .t-badge{
+    display:inline-block;margin-top:8px;font-size:11px;font-weight:700;color:var(--teal);
+    background:rgba(31,157,138,.08);padding:4px 10px;border-radius:20px;letter-spacing:.3px;
+  }
+
+  /* ---------- skills ---------- */
+  .skill-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .skill-card{background:var(--card-bg);border:1px solid var(--line);border-radius:16px;padding:28px 26px;}
+  .skill-card h3{
+    font-size:12px;letter-spacing:2px;color:var(--gray-med);font-weight:700;margin-bottom:16px;
+    text-transform:uppercase;
+  }
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .pill{
+    font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:20px;
+    background:#fff;border:1px solid var(--line);color:var(--gray-dark);
+  }
+  .skill-card:nth-child(2) .pill{border-color:rgba(229,0,125,.25);color:var(--pink);background:rgba(229,0,125,.05);}
+  .skill-card:nth-child(3) .pill{border-color:rgba(31,157,138,.25);color:var(--teal);background:rgba(31,157,138,.06);}
+
+  /* ---------- work ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .work-card{
+    border-radius:16px;overflow:hidden;background:#fff;border:1px solid var(--line);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .work-card:hover{transform:translateY(-6px);box-shadow:0 18px 34px -18px rgba(0,0,0,.25);}
+  .work-thumb{
+    height:150px;display:flex;align-items:center;justify-content:center;position:relative;
+    font-family:var(--serif);color:#fff;font-size:15px;font-weight:700;text-align:center;padding:14px;
+  }
+  .work-thumb span{position:relative;z-index:1;}
+  .work-thumb::after{content:"↗";position:absolute;top:12px;right:14px;font-size:16px;opacity:.85;}
+  .work-body{padding:18px 20px 22px;}
+  .work-cat{font-size:10.5px;letter-spacing:1.5px;color:var(--pink);font-weight:700;text-transform:uppercase;}
+  .work-title{font-size:14.5px;font-weight:700;margin-top:6px;color:var(--black);}
+  .work-more{
+    margin-top:44px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
+  }
+
+  /* ---------- certs ---------- */
+  .cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  .cert-list li{
+    display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);
+  }
+  .cert-list li:last-child{border-bottom:none;}
+  .cert-year{font-family:var(--serif);font-weight:800;color:var(--teal);min-width:46px;font-size:14.5px;}
+  .cert-name{font-size:14px;color:var(--gray-dark);font-weight:500;}
+  .cert-name b{color:var(--black);}
+  .col-label{font-size:12px;letter-spacing:2px;color:var(--gray-med);font-weight:700;margin-bottom:14px;text-transform:uppercase;}
+
+  /* ---------- contact ---------- */
+  .contact{
+    background:linear-gradient(135deg, #ffffff 0%, #fdeef4 45%, #f4a6c6 78%, #E5007D 100%);
+    padding:120px 0 90px;
+  }
+  .contact-inner{text-align:left;}
+  .contact h2{
+    font-family:var(--serif);font-weight:800;font-size:clamp(34px,5.5vw,58px);color:var(--black);
+    line-height:1.05;
+  }
+  .contact h2 .accent{color:var(--pink);}
+  .contact p{margin-top:18px;color:var(--gray-dark);font-size:15.5px;max-width:520px;line-height:1.7;}
+  .contact-actions{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap;}
+  .contact-info{margin-top:56px;display:flex;gap:52px;flex-wrap:wrap;}
+  .contact-info div span{display:block;font-size:11px;letter-spacing:1.5px;color:var(--gray-med);font-weight:700;text-transform:uppercase;margin-bottom:6px;}
+  .contact-info div b{font-size:15px;color:var(--black);}
+
+  footer{padding:34px 0;background:var(--black);}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+  footer p{color:#999;font-size:12.5px;}
+  .footer-links{display:flex;gap:22px;}
+  .footer-links a{color:#ccc;font-size:12.5px;font-weight:600;}
+  .footer-links a:hover{color:var(--pink);}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:940px){
+    nav.links{display:none;}
+    .burger{display:flex;}
+    .about-grid{grid-template-columns:1fr;gap:40px;}
+    .skill-groups{grid-template-columns:1fr;}
+    .work-grid{grid-template-columns:repeat(2,1fr);}
+    .cert-grid{grid-template-columns:1fr;gap:36px;}
+    .hero-blob{width:420px;height:420px;right:-18%;top:20%;}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 22px;}
+    .work-grid{grid-template-columns:1fr;}
+    .module{padding:80px 0;}
+    .module-head{flex-direction:column;gap:10px;}
+    .module-num{font-size:48px;}
+    .hero{padding-top:110px;}
+    .hero-stats{gap:28px;}
+    .contact-info{gap:28px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo">Harry Lin</a>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
+      <a href="#contact" class="nav-cta">Say Hello</a>
+    </nav>
+    <button class="burger" id="burgerBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">×</button>
+  <a href="#about">About</a>
+  <a href="#experience">Experience</a>
+  <a href="#skills">Skills</a>
+  <a href="#work">Work</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<section class="hero" id="top">
+  <div class="hero-blob"></div>
+  <svg class="hero-dots" viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#D9D9D9" stroke-width="1.4" opacity=".7">
+      <line x1="40" y1="20" x2="180" y2="60"/>
+      <line x1="180" y1="60" x2="150" y2="150"/>
+      <line x1="150" y1="150" x2="260" y2="180"/>
+      <line x1="40" y1="20" x2="260" y2="40"/>
+      <line x1="260" y1="40" x2="260" y2="180"/>
+    </g>
+    <g fill="#C9C9C9">
+      <circle cx="40" cy="20" r="4"/><circle cx="180" cy="60" r="4"/>
+      <circle cx="150" cy="150" r="4"/><circle cx="260" cy="180" r="4"/><circle cx="260" cy="40" r="4"/>
+    </g>
+  </svg>
+
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Portfolio &amp; Self-Introduction</div>
+    <h1>Harry Lin<br><span class="accent">林奕圻</span></h1>
+    <p class="hero-role">Designer <b>×</b> Front-end Developer <b>×</b> Connector — 具備逾 12 年跨領域經驗，橫跨<b>網頁設計</b>、<b>前端開發</b>、<b>國際業務</b>與<b>品牌視覺</b>。</p>
+    <div class="hero-quote">
+      “To me, the world is a giant game of connect-the-dots between problems and solutions.<br>And I see myself as the one who draws that line.”
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#work">看作品集 View Work</a>
+      <a class="btn btn-outline" href="mailto:issyoni67@gmail.com">聯絡我 Contact Me</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><b>12+</b><span>YEARS EXPERIENCE</span></div>
+      <div class="stat"><b>4</b><span>DISCIPLINES</span></div>
+      <div class="stat"><b>2</b><span>LANGUAGES · 中/英</span></div>
+      <div class="stat"><b>台南</b><span>TAINAN, TAIWAN</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="about">
+  <div class="wrap">
+    <div class="module-head reveal">
+      <div class="module-num"><small>MODULE</small>01</div>
+      <div class="module-title">
+        <h2>About Me 關於我</h2>
+        <p>連接問題與解答的人 — 用工程邏輯思考，用設計語言溝通。</p>
+      </div>
+    </div>
+
+    <div class="about-grid">
+      <div class="reveal">
+        <p class="about-lead">具備逾 12 年跨領域工作經驗，涵蓋前端開發、網站設計、國際業務、品牌行銷及視覺設計。曾任職於網頁設計公司、美商科技公司及外銷企業，熟悉網站開發、UI 實作、品牌形象及跨部門協作，能從需求分析、介面設計到前端開發提供完整解決方案。擁有工程背景與良好的自主學習能力，樂於持續精進技術並將設計思維融入產品開發。</p>
+        <div class="quote-card">
+          <p>My Core Philosophy — Connecting the Dots. I am a systematic problem-solver who combines a sharp tech mindset with a strong passion for relationship management.</p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="strength">
+          <div class="strength-num">01</div>
+          <div>
+            <h3>前端開發：兼具技術與設計能力</h3>
+            <p>曾任職於網頁設計公司及美商科技公司，負責網站切版、HTML、CSS、JavaScript 開發、網站維護及 UI 實作。熟悉網站開發流程，能將設計稿轉換為高品質網頁介面，兼顧程式可維護性、使用者體驗與視覺一致性。</p>
+          </div>
+        </div>
+        <div class="strength">
+          <div class="strength-num">02</div>
+          <div>
+            <h3>國際業務：理解需求與跨文化溝通</h3>
+            <p>曾擔任外銷業務，負責海外客戶開發、品牌形象、網站建置及 Alibaba 平台營運，具備中英文溝通能力及跨文化合作經驗。能快速理解客戶需求，將商業目標轉化為具體執行方案，提升團隊協作效率。</p>
+          </div>
+        </div>
+        <div class="strength">
+          <div class="strength-num">03</div>
+          <div>
+            <h3>問題解決：工程思維與跨領域整合</h3>
+            <p>工程背景培養了良好的邏輯分析能力，習慣透過拆解需求、定位問題及持續優化的方式完成工作。跨足工程、設計及國際業務的經驗，使我能從技術、使用者及商業需求等不同角度思考，快速適應新技術與新專案。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="module alt" id="experience">
+  <div class="wrap">
+    <div class="module-head reveal">
+      <div class="module-num"><small>MODULE</small>02</div>
+      <div class="module-title">
+        <h2>Experience 經歷時間軸</h2>
+        <p>國立嘉義大學 生物機電工程學系學士 B.E. — 從工程跨足設計、教育與國際業務。</p>
+      </div>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="t-item">
+        <span class="t-year">2008</span>
+        <div class="t-role">國立嘉義大學</div>
+        <div class="t-desc">文化創意產業跨領域學程・藝術管理微學程・專業英文溝通微學程</div>
+      </div>
+      <div class="t-item">
+        <span class="t-year">2013</span>
+        <div class="t-role">英文教學與語言交換</div>
+        <div class="t-desc">高中、大學英文家教；美國外籍生語言交換</div>
+      </div>
+      <div class="t-item">
+        <span class="t-year">2016</span>
+        <div class="t-role">美商網碩有限公司台灣分公司 — 前端工程師</div>
+        <div class="t-desc">與總部行銷部門討論網站行銷策略</div>
+        <span class="t-badge">Front-end</span>
+      </div>
+      <div class="t-item">
+        <span class="t-year">2018</span>
+        <div class="t-role">麗鑫花卉有限公司 — 海外蘭花業務</div>
+        <div class="t-desc">海外客戶開發與訂單協調</div>
+        <span class="t-badge">International Sales</span>
+      </div>
+      <div class="t-item">
+        <span class="t-year">2019</span>
+        <div class="t-role">台南市 弘文補習班 — 國高中英文老師</div>
+        <div class="t-desc">中英文教學與班級經營</div>
+        <span class="t-badge">Education</span>
+      </div>
+      <div class="t-item">
+        <span class="t-year">2020</span>
+        <div class="t-role">美商語言連線有限公司台灣分公司</div>
+        <div class="t-desc">DTP 及程式、翻譯</div>
+        <span class="t-badge">DTP / Translation</span>
+      </div>
+      <div class="t-item">
+        <span class="t-year">2024</span>
+        <div class="t-role">圻仕曼創意工作室</div>
+        <div class="t-desc">設計、排版、教育</div>
+        <span class="t-badge">Studio Founder</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="skills">
+  <div class="wrap">
+    <div class="module-head reveal">
+      <div class="module-num"><small>MODULE</small>03</div>
+      <div class="module-title">
+        <h2>Skills 專業技能</h2>
+        <p>從繪圖軟體到前端程式，橫跨設計與開發的完整工具箱。</p>
+      </div>
+    </div>
+
+    <div class="skill-groups reveal">
+      <div class="skill-card">
+        <h3>繪圖軟體</h3>
+        <div class="pill-row">
+          <span class="pill">Photoshop</span>
+          <span class="pill">Illustrator</span>
+          <span class="pill">InDesign</span>
+          <span class="pill">After Effects</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>專業技能</h3>
+        <div class="pill-row">
+          <span class="pill">品牌 CIS</span>
+          <span class="pill">網頁設計</span>
+          <span class="pill">UI 規劃</span>
+          <span class="pill">插畫設計</span>
+          <span class="pill">影像剪輯</span>
+          <span class="pill">英文教學</span>
+          <span class="pill">中英翻譯</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>前端程式</h3>
+        <div class="pill-row">
+          <span class="pill">HTML</span>
+          <span class="pill">CSS</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">AI 工具整合</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="module alt" id="work">
+  <div class="wrap">
+    <div class="module-head reveal">
+      <div class="module-num"><small>MODULE</small>04</div>
+      <div class="module-title">
+        <h2>Work 作品選集</h2>
+        <p>平面、視覺、網頁與品牌設計精選 — 完整作品請見 Behance。</p>
+      </div>
+    </div>
+
+    <div class="work-grid reveal">
+      <a class="work-card" href="https://www.behance.net/gallery/198087163/-Logo" target="_blank" rel="noopener">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#E5007D,#7a0047);"><span>劇場 Logo</span></div>
+        <div class="work-body"><div class="work-cat">Logo Design</div><div class="work-title">劇場 Logo</div></div>
+      </a>
+      <a class="work-card" href="https://www.behance.net/gallery/198081281/_" target="_blank" rel="noopener">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#1F9D8A,#0d4a41);"><span>慶生趴 宣傳海報</span></div>
+        <div class="work-body"><div class="work-cat">Poster</div><div class="work-title">慶生趴 宣傳海報</div></div>
+      </a>
+      <a class="work-card" href="https://www.behance.net/gallery/198081127/_" target="_blank" rel="noopener">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#E5007D,#F4A6C6);"><span>悶壞了<br>線上桌遊趴</span></div>
+        <div class="work-body"><div class="work-cat">Event Promo</div><div class="work-title">悶壞了 線上桌遊趴 活動宣傳</div></div>
+      </a>
+      <a class="work-card" href="https://www.behance.net/gallery/198081049/_" target="_blank" rel="noopener">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#1A1A1A,#444);"><span>小周末<br>電影夜</span></div>
+        <div class="work-body"><div class="work-cat">Event Promo</div><div class="work-title">小周末電影夜 活動宣傳</div></div>
+      </a>
+      <a class="work-card" href="https://www.behance.net/gallery/198080915/_" target="_blank" rel="noopener">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#1F9D8A,#8FD4C8);"><span>一起來做<br>瑪德蓮</span></div>
+        <div class="work-body"><div class="work-cat">Event Promo</div><div class="work-title">一起來做瑪德蓮 手作活動</div></div>
+      </a>
+      <a class="work-card" href="https://www.behance.net/gallery/198080739/_" target="_blank" rel="noopener">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#7a0047,#E5007D);"><span>復古趴<br>海報設計</span></div>
+        <div class="work-body"><div class="work-cat">Poster</div><div class="work-title">復古趴 海報設計</div></div>
+      </a>
+      <a class="work-card" href="https://www.behance.net/gallery/198080637/-IG-Logo" target="_blank" rel="noopener">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#E5007D,#1F9D8A);"><span>簡單吃<br>IG Logo</span></div>
+        <div class="work-body"><div class="work-cat">Logo / Social</div><div class="work-title">簡單吃 IG 社群 Logo</div></div>
+      </a>
+      <a class="work-card" href="https://www.behance.net/gallery/198080097/Drizzzle-Logo-" target="_blank" rel="noopener">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#1A1A1A,#E5007D);"><span>Drizzzle<br>阿卡貝拉樂團</span></div>
+        <div class="work-body"><div class="work-cat">Logo Design</div><div class="work-title">Drizzzle 阿卡貝拉樂團 Logo</div></div>
+      </a>
+      <a class="work-card" href="https://www.behance.net/gallery/86188501/Olympia-Innovation-USA" target="_blank" rel="noopener">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#1F9D8A,#1A1A1A);"><span>Olympia<br>Innovation USA</span></div>
+        <div class="work-body"><div class="work-cat">Branding · International</div><div class="work-title">Olympia Innovation USA</div></div>
+      </a>
+    </div>
+
+    <div class="work-more reveal">
+      <a class="btn btn-primary" href="https://www.behance.net/happharr" target="_blank" rel="noopener">完整作品集 Behance ↗</a>
+      <a class="btn btn-outline" href="https://iqqqi.github.io/" target="_blank" rel="noopener">舊版作品網站 iqqqi ↗</a>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="certs">
+  <div class="wrap">
+    <div class="module-head reveal">
+      <div class="module-num"><small>MODULE</small>05</div>
+      <div class="module-title">
+        <h2>Certificates &amp; Awards 證照與榮譽</h2>
+      </div>
+    </div>
+
+    <div class="cert-grid reveal">
+      <div>
+        <div class="col-label">Certificate 證照</div>
+        <ul class="cert-list">
+          <li><span class="cert-year">2015</span><span class="cert-name"><b>TIMS 行銷科學學會</b> 行銷企劃證照</span></li>
+          <li><span class="cert-year">2018</span><span class="cert-name"><b>百年翻譯社</b> 中英文職場口譯培訓班</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-label">Awards &amp; Activities 榮譽與社團</div>
+        <ul class="cert-list">
+          <li><span class="cert-year">2013</span><span class="cert-name">救國團 <b>大專優秀青年</b></span></li>
+          <li><span class="cert-year">2011</span><span class="cert-name">國立嘉義大學 文化創意商品設計競賽 <b>佳作</b></span></li>
+          <li><span class="cert-year">08–12</span><span class="cert-name">進修部學生會美宣部長・<b>心理研究社社長</b>・管樂社／四健會／新聞社／攝影社 美宣</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-inner reveal">
+    <div class="eyebrow">Module 06 — Contact</div>
+    <h2>Let's connect <span class="accent">the dots</span>,<br>together.</h2>
+    <p>目前接受自由接案與正職機會，歡迎透過 Email 或電話與我聯繫，一起把問題與解答連在一起。</p>
+    <div class="contact-actions">
+      <a class="btn btn-primary" href="mailto:issyoni67@gmail.com">issyoni67@gmail.com</a>
+      <a class="btn btn-outline" href="tel:0911794213">0911-794-213</a>
+    </div>
+    <div class="contact-info">
+      <div><span>Location</span><b>Tainan City, Taiwan</b></div>
+      <div><span>Studio</span><b>圻仕曼創意工作室</b></div>
+      <div><span>Behance</span><b><a href="https://www.behance.net/happharr" target="_blank" rel="noopener">behance.net/happharr ↗</a></b></div>
+      <div><span>Old Portfolio</span><b><a href="https://iqqqi.github.io/" target="_blank" rel="noopener">iqqqi.github.io ↗</a></b></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <p>© 2026 Harry Lin 林奕圻. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="mailto:issyoni67@gmail.com">Email</a>
+      <a href="https://www.behance.net/happharr" target="_blank" rel="noopener">Behance</a>
+      <a href="https://iqqqi.github.io/" target="_blank" rel="noopener">iqqqi</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // sticky header
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // mobile menu
+  const burger = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  burger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // respect reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
